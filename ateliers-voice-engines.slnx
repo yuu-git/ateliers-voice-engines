@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/solution items/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Ateliers.Voice.Engines.Voicevox.CLI/Ateliers.Voice.Engines.Voicevox.CLI.csproj" Id="64ff22f9-0092-4a56-b9aa-452988301559" />
+    <Project Path="src/Ateliers.Voice.Engines.Voicevox/Ateliers.Voice.Engines.Voicevox.csproj" Id="409c52c5-5687-40c1-8fde-3fbd19aea4cf" />
+    <Project Path="src/Ateliers.Voice.Engines/Ateliers.Voice.Engines.csproj" Id="14e84744-56c0-4849-86ec-7ad55ab24d2b" />
+  </Folder>
+  <Folder Name="/src/unit tests/">
+    <Project Path="src/Ateliers.Voice.Engines.UnitTests/Ateliers.Voice.Engines.UnitTests.csproj" Id="21998ade-b3ca-4524-a429-d84c8fc009c1" />
+    <Project Path="src/Ateliers.Voice.Engines.Voicevox.CLI.UnitTests/Ateliers.Voice.Engines.Voicevox.CLI.UnitTests.csproj" Id="85b93eda-66b3-4de7-bd45-4e67b4ca6917" />
+    <Project Path="src/Ateliers.Voice.Engines.Voicevox.UnitTests/Ateliers.Voice.Engines.Voicevox.UnitTests.csproj" Id="6cbaf6f5-b966-42db-beed-27f2bac2306f" />
+  </Folder>
+</Solution>
