@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ateliers.Voice.Engines.Voicevox.CLI\Ateliers.Voice.Engines.Voicevox.CLI.csproj" />
+    <ProjectReference Include="..\Ateliers.Voice.Engines.VoicevoxTools\Ateliers.Voice.Engines.VoicevoxTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

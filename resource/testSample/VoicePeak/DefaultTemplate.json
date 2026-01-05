@@ -1,0 +1,176 @@
+﻿{
+  "version": "1.2.19",
+  "project": {
+    "params": {
+      "speed": 1.0,
+      "pitch": 0.0,
+      "pause": 1.0,
+      "volume": 1.0
+    },
+    "emotions": {
+      "happy": 0.0,
+      "angry": 0.0,
+      "sad": 0.0,
+      "ochoushimono": 0.0,
+      "hightension": 0.0,
+      "buchigire": 0.0,
+      "nageki": 0.0,
+      "sagesumi": 0.0,
+      "sasayaki": 0.0
+    },
+    "global-emotions": [
+      {
+        "nar": "フリモメン",
+        "em": {
+          "normal": 0.0,
+          "happy": 0.0,
+          "angry": 0.0,
+          "sad": 0.0,
+          "ochoushimono": 0.0
+        }
+      },
+      {
+        "nar": "夏色花梨",
+        "em": {
+          "neutral": 0.0,
+          "hightension": 0.0,
+          "buchigire": 0.0,
+          "nageki": 0.0,
+          "sagesumi": 0.0,
+          "sasayaki": 0.0
+        }
+      }
+    ],
+    "global-settings": [
+      {
+        "nar": "フリモメン",
+        "pm": {
+          "speed": 1.0,
+          "pitch": 0.0,
+          "pause": 1.0,
+          "volume": 1.0
+        }
+      },
+      {
+        "nar": "夏色花梨",
+        "pm": {
+          "speed": 1.0,
+          "pitch": 0.0,
+          "pause": 1.0,
+          "volume": 1.0
+        }
+      }
+    ],
+    "export": {
+      "mode": 2,
+      "audio-format": 0,
+      "sample-rate": 48000,
+      "write-scripts": false,
+      "write-text": true,
+      "write-srt": false,
+      "write-lab": false,
+      "name-rule": false,
+      "char-code": 0,
+      "name-formats": [ 1, 0, 0 ]
+    },
+    "blocks": [
+      {
+        "narrator": {
+          "key": "夏色花梨",
+          "language": "japanese",
+          "narrator-version": -1
+        },
+        "time-offset-mode": 2,
+        "time-offset": 0.0,
+        "params": {
+          "speed": 1.0,
+          "pitch": 0.0,
+          "pause": 1.0,
+          "volume": 1.0
+        },
+        "emotions": {
+          "happy": 0.0,
+          "angry": 0.0,
+          "sad": 0.0,
+          "ochoushimono": 0.0,
+          "hightension": 0.0,
+          "buchigire": 0.0,
+          "nageki": 0.0,
+          "sagesumi": 0.0,
+          "sasayaki": 0.0
+        },
+        "sentence-list": [
+          {
+            "text": "プロジェクトの参考用のテンプレート音声です。",
+            "has-eos": true,
+            "tokens": [
+              {
+                "s": "プロジェクト",
+                "pos": 4096,
+                "lang": 0,
+                "pe": false,
+                "syl": [
+                  {
+                    "s": "プ",
+                    "ig": true,
+                    "a": 8192,
+                    "i": 0.0,
+                    "u": false,
+                    "p": [
+                      {
+                        "s": "p",
+                        "d": 1.0,
+                        "n": false,
+                        "dt": 0
+                      },
+                      {
+                        "s": "u",
+                        "d": 1.0,
+                        "n": true,
+                        "dt": 0
+                      }
+                    ]
+                  },
+                  {
+                    "s": "ロ",
+                    "ig": true,
+                    "a": 8193,
+                    "i": 0.0,
+                    "u": false,
+                    "p": [
+                      {
+                        "s": "r",
+                        "d": 1.0,
+                        "n": false,
+                        "dt": 0
+                      },
+                      {
+                        "s": "o",
+                        "d": 1.0,
+                        "n": true,
+                        "dt": 0
+                      }
+                    ]
+                  }
+                ],
+                "r8": [ 0, 18 ],
+                "r32": [ 0, 6 ]
+              }
+            ]
+          }
+        ],
+        "sentence-ranges": [ [ 0, 22 ] ]
+      }
+    ]
+  },
+  "voices": {
+    "フリモメン": {
+      "latest": 100,
+      "nid": "フリモメン"
+    },
+    "夏色花梨": {
+      "latest": 100,
+      "nid": "夏色花梨"
+    }
+  }
+}
