@@ -1,9 +1,8 @@
+ï»¿namespace Ateliers.Voice.Engines.VoicePeakTools;
 
-namespace Ateliers.Voice.Engins.VoicePeakTools;
-
-// VPPƒtƒ@ƒCƒ‹‚ğ‰ğÍ‚·‚é‚½‚ß‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX
+// VPPãƒ•ã‚¡ã‚¤ãƒ«ã‚’è§£æã™ã‚‹ãŸã‚ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
 public interface IVppParser
 {
-    VppFile ParseVppFile(string filePath); // VPPƒtƒ@ƒCƒ‹‚ğ‰ğÍ‚µ‚ÄƒIƒuƒWƒFƒNƒg‚É•ÏŠ·
-    bool ValidateVppFile(string filePath);   // VPPƒtƒ@ƒCƒ‹‚Ì\‘¢‚ğŒŸØ
+    VppFile ParseVppFile(string filePath); // VPPãƒ•ã‚¡ã‚¤ãƒ«ã‚’è§£æã—ã¦ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¤‰æ›
+    bool ValidateVppFile(string filePath);   // VPPãƒ•ã‚¡ã‚¤ãƒ«ã®æ§‹é€ ã‚’æ¤œè¨¼
 }

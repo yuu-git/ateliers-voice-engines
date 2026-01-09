@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ateliers.Voice.Engines\Ateliers.Voice.Engines.csproj" />
+    <ProjectReference Include="..\Ateliers.Voice.Engines.VoicePeakTools\Ateliers.Voice.Engines.VoicePeakTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

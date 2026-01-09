@@ -1,9 +1,9 @@
-using System.Text.Json.Serialization;
+ï»¿using System.Text.Json.Serialization;
 
-namespace Ateliers.Voice.Engins.VoicePeakTools
+namespace Ateliers.Voice.Engines.VoicePeakTools
 {
     /// <summary>
-    /// VPPƒtƒ@ƒCƒ‹‘S‘Ì\‘¢
+    /// VPPãƒ•ã‚¡ã‚¤ãƒ«å…¨ä½“æ§‹é€ 
     /// </summary>
     public class VppFile
     {
@@ -18,7 +18,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒvƒƒWƒFƒNƒgî•ñ
+    /// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆæƒ…å ±
     /// </summary>
     public class VppProject
     {
@@ -42,7 +42,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒvƒƒWƒFƒNƒgƒpƒ‰ƒ[ƒ^
+    /// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
     /// </summary>
     public class ProjectParams
     {
@@ -57,7 +57,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒOƒ[ƒoƒ‹ƒGƒ‚[ƒVƒ‡ƒ“
+    /// ã‚°ãƒ­ãƒ¼ãƒãƒ«ã‚¨ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³
     /// </summary>
     public class GlobalEmotion
     {
@@ -68,7 +68,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒOƒ[ƒoƒ‹İ’è
+    /// ã‚°ãƒ­ãƒ¼ãƒãƒ«è¨­å®š
     /// </summary>
     public class GlobalSetting
     {
@@ -80,7 +80,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒGƒNƒXƒ|[ƒgİ’è
+    /// ã‚¨ã‚¯ã‚¹ãƒãƒ¼ãƒˆè¨­å®š
     /// </summary>
     public class ExportSettings
     {
@@ -116,7 +116,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒiƒŒ[ƒVƒ‡ƒ“ƒuƒƒbƒN
+    /// ãƒŠãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ãƒ–ãƒ­ãƒƒã‚¯
     /// </summary>
     public class Block
     {
@@ -143,7 +143,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒiƒŒ[ƒ^[î•ñ
+    /// ãƒŠãƒ¬ãƒ¼ã‚¿ãƒ¼æƒ…å ±
     /// </summary>
     public class NarratorInfo
     {
@@ -156,7 +156,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// •¶î•ñ
+    /// æ–‡æƒ…å ±
     /// </summary>
     public class Sentence
     {
@@ -171,7 +171,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ƒg[ƒNî•ñ
+    /// ãƒˆãƒ¼ã‚¯æƒ…å ±
     /// </summary>
     public class Token
     {
@@ -198,7 +198,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ‰¹ßî•ñ
+    /// éŸ³ç¯€æƒ…å ±
     /// </summary>
     public class Syllable
     {
@@ -222,7 +222,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ‰¹‘fî•ñ
+    /// éŸ³ç´ æƒ…å ±
     /// </summary>
     public class Phoneme
     {
@@ -240,7 +240,7 @@ namespace Ateliers.Voice.Engins.VoicePeakTools
     }
 
     /// <summary>
-    /// ‰¹ºî•ñ
+    /// éŸ³å£°æƒ…å ±
     /// </summary>
     public class Voice
     {

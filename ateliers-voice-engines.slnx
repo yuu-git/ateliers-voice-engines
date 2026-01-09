@@ -1,7 +1,9 @@
 <Solution>
   <Folder Name="/solution items/">
+    <File Path=".github/workflows/ci-cd.yml" />
     <File Path=".gitignore" />
     <File Path="LICENSE" />
+    <File Path="scripts/copy-to-local-nuget.ps1" />
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Ateliers.Voice.Engines.UnitTests/Ateliers.Voice.Engines.UnitTests.csproj" Id="21998ade-b3ca-4524-a429-d84c8fc009c1" />
@@ -10,13 +12,15 @@
   <Folder Name="/src/VoicePeak/">
     <Project Path="src/Ateliers.Voice.Engines.VoicePeakTools/Ateliers.Voice.Engines.VoicePeakTools.csproj" />
   </Folder>
-  <Folder Name="/src/VoicePeak/unit tests/">
+  <Folder Name="/src/VoicePeak/tests/">
+    <Project Path="src/Ateliers.Voice.Engines.VoicePeakTools.IntegrationTests/Ateliers.Voice.Engines.VoicePeakTools.IntegrationTests.csproj" Id="1b4b328f-344e-4126-8171-fe3f17f65894" />
     <Project Path="src/Ateliers.Voice.Engines.VoicePeakTools.UnitTests/Ateliers.Voice.Engines.VoicePeakTools.UnitTests.csproj" />
   </Folder>
   <Folder Name="/src/VOICEVOX/">
     <Project Path="src/Ateliers.Voice.Engines.VoicevoxTools/Ateliers.Voice.Engines.VoicevoxTools.csproj" Id="409c52c5-5687-40c1-8fde-3fbd19aea4cf" />
   </Folder>
-  <Folder Name="/src/VOICEVOX/unit tests/">
+  <Folder Name="/src/VOICEVOX/tests/">
+    <Project Path="src/Ateliers.Voice.Engines.VoicevoxTools.IntegrationTests/Ateliers.Voice.Engines.VoicevoxTools.IntegrationTests.csproj" Id="3106a845-0607-4cb0-ba3d-1e7d2a0c6ca8" />
     <Project Path="src/Ateliers.Voice.Engines.VoicevoxTools.UnitTests/Ateliers.Voice.Engines.VoicevoxTools.UnitTests.csproj" Id="6cbaf6f5-b966-42db-beed-27f2bac2306f" />
   </Folder>
 </Solution>
