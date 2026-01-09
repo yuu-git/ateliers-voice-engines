@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ateliers.Voice.Engines.VoicevoxTools\Ateliers.Voice.Engines.VoicevoxTools.csproj" />
-    <ProjectReference Include="..\ext\Ateliers.Core\Ateliers.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
