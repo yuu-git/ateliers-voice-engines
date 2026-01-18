@@ -1,0 +1,205 @@
+﻿name: Check VOICEVOX Updates
+
+on:
+  schedule:
+    # 毎週月曜日 AM 9:00 (UTC) = JST 18:00
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # 手動実行も可能
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        dependency:
+          - name: "VOICEVOX Core"
+            repo: "VOICEVOX/voicevox_core"
+            label: "voicevox-core"
+            current_file: "README.md"
+            pattern: 'VOICEVOX Core:\s*v?\K[\d.]+'
+            docs_link: "https://github.com/VOICEVOX/voicevox_core"
+          
+          - name: "VOICEVOX"
+            repo: "VOICEVOX/voicevox"
+            label: "voicevox"
+            current_file: "README.md"
+            pattern: 'VOICEVOX:\s*v?\K[\d.]+'
+            docs_link: "https://voicevox.hiroshiba.jp/"
+          
+          - name: "VoicevoxCoreSharp"
+            repo: "yamachu/VoicevoxCoreSharp"
+            label: "voicevox-core-sharp"
+            current_file: "README.md"
+            pattern: 'VoicevoxCoreSharp:\s*v?\K[\d.]+'
+            docs_link: "https://github.com/yamachu/VoicevoxCoreSharp"
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Get latest release version
+      id: latest
+      run: |
+        LATEST=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -s https://api.github.com/repos/${{ matrix.dependency.repo }}/releases/latest \
+          | jq -r .tag_name)
+        
+        # tag_name から "v" プレフィックスを削除
+        LATEST_CLEAN=$(echo "$LATEST" | sed 's/^v//')
+        
+        echo "version=$LATEST_CLEAN" >> $GITHUB_OUTPUT
+        echo "tag=$LATEST" >> $GITHUB_OUTPUT
+        echo "Latest ${{ matrix.dependency.name }}: $LATEST_CLEAN"
+    
+    - name: Get current version from README
+      id: current
+      run: |
+        # README.md からバージョンを抽出（存在しない場合は "0.0.0"）
+        if [ -f "${{ matrix.dependency.current_file }}" ]; then
+          CURRENT=$(grep -oP '${{ matrix.dependency.pattern }}' ${{ matrix.dependency.current_file }} | head -1 || echo "0.0.0")
+        else
+          CURRENT="0.0.0"
+        fi
+        
+        echo "version=$CURRENT" >> $GITHUB_OUTPUT
+        echo "Current version: $CURRENT"
+    
+    - name: Check if update needed
+      id: check
+      run: |
+        LATEST="${{ steps.latest.outputs.version }}"
+        CURRENT="${{ steps.current.outputs.version }}"
+        
+        if [ "$LATEST" != "$CURRENT" ]; then
+          echo "update_needed=true" >> $GITHUB_OUTPUT
+          echo "✅ Update needed: $CURRENT -> $LATEST"
+        else
+          echo "update_needed=false" >> $GITHUB_OUTPUT
+          echo "✅ Already up to date"
+        fi
+    
+    - name: Check for existing issue
+      if: steps.check.outputs.update_needed == 'true'
+      id: existing
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        EXISTING=$(gh issue list \
+          --label "${{ matrix.dependency.label }}" \
+          --search "${{ matrix.dependency.name }} ${{ steps.latest.outputs.version }}" \
+          --json number \
+          --jq length)
+        
+        if [ "$EXISTING" -gt "0" ]; then
+          echo "exists=true" >> $GITHUB_OUTPUT
+          echo "⚠️ Issue already exists"
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+          echo "✅ No existing issue"
+        fi
+    
+    - name: Get release notes
+      if: steps.check.outputs.update_needed == 'true' && steps.existing.outputs.exists == 'false'
+      id: release_notes
+      run: |
+        NOTES=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -s https://api.github.com/repos/${{ matrix.dependency.repo }}/releases/latest \
+          | jq -r .body)
+        
+        # 複数行を扱うため、EOF を使用
+        echo "notes<<EOF" >> $GITHUB_OUTPUT
+        echo "$NOTES" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    
+    - name: Check for breaking changes
+      if: steps.check.outputs.update_needed == 'true' && steps.existing.outputs.exists == 'false'
+      id: breaking
+      run: |
+        NOTES="${{ steps.release_notes.outputs.notes }}"
+        
+        if echo "$NOTES" | grep -iq "breaking"; then
+          echo "has_breaking=true" >> $GITHUB_OUTPUT
+          echo "⚠️ Breaking changes detected!"
+        else
+          echo "has_breaking=false" >> $GITHUB_OUTPUT
+          echo "✅ No breaking changes"
+        fi
+    
+    - name: Create Issue
+      if: steps.check.outputs.update_needed == 'true' && steps.existing.outputs.exists == 'false'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const name = '${{ matrix.dependency.name }}';
+          const latestVersion = '${{ steps.latest.outputs.version }}';
+          const latestTag = '${{ steps.latest.outputs.tag }}';
+          const currentVersion = '${{ steps.current.outputs.version }}';
+          const repo = '${{ matrix.dependency.repo }}';
+          const hasBreaking = '${{ steps.breaking.outputs.has_breaking }}' === 'true';
+          const releaseNotes = `${{ steps.release_notes.outputs.notes }}`;
+          const docsLink = '${{ matrix.dependency.docs_link }}';
+          
+          const title = hasBreaking 
+            ? `⚠️ ${name} ${latestVersion} がリリースされました (Breaking Changes あり)`
+            : `🔔 ${name} ${latestVersion} がリリースされました`;
+          
+          const labels = hasBreaking
+            ? ['dependencies', '${{ matrix.dependency.label }}', 'automated', 'breaking-change', 'priority:high']
+            : ['dependencies', '${{ matrix.dependency.label }}', 'automated', 'priority:medium'];
+          
+          const issueBody = `## 🎉 ${name} 新バージョンがリリースされました
+          
+          ### バージョン情報
+          
+          - **現在のバージョン**: ${currentVersion}
+          - **最新バージョン**: ${latestVersion}
+          - **リリースページ**: https://github.com/${repo}/releases/tag/${latestTag}
+          - **公式サイト**: ${docsLink}
+          
+          ${hasBreaking ? '### ⚠️ Breaking Changes\n\nこのリリースには **Breaking Changes** が含まれています。\nアップデート前に必ずリリースノートを確認してください。\n' : ''}
+          
+          ### リリースノート
+          
+          ${releaseNotes || 'リリースノートが見つかりませんでした。'}
+          
+          ### 更新が必要なファイル
+          
+          - [ ] \`README.md\` - バージョン情報を更新
+          - [ ] \`src/Ateliers.Voice.Engines.VoicevoxTools/VoicevoxVoiceGenerator.cs\` - 必要に応じてコードを更新
+          - [ ] ドキュメント（該当する場合）
+          - [ ] テストコード（該当する場合）
+          
+          ### 確認手順
+          
+          1. [リリースノート](https://github.com/${repo}/releases/tag/${latestTag}) を確認
+          2. Breaking changes や互換性の問題がないか確認
+          3. テスト環境で動作確認
+          4. 必要に応じてコードを更新
+          5. テストを実行
+          6. README.md のバージョン情報を更新
+          7. このIssueをクローズ
+          
+          ### 参考リンク
+          
+          - [VOICEVOX Core バージョン管理ガイド](../ateliers-ai-mcp-projectbase/content/release-strategy/voicevox-core-version-management.md)
+          - [依存関係バージョン監視ガイド](../ateliers-knowledge/guidelines/development/github/cicd/dependency-version-monitoring.md)
+          
+          ---
+          
+          *このIssueは自動生成されました*
+          `;
+          
+          await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: issueBody,
+            labels: labels
+          });
+          
+          console.log(`✅ Issue created: ${title}`);
