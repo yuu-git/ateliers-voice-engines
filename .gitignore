@@ -115,3 +115,6 @@ appsettings.*.json
 # MCP generated notes (user data)
 notes/
 *.backup
+
+# テスト用の voicevox_core
+.voicevox_core/
